@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY", default="12345")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("Debug", default=False)
+DEBUG = config("DEBUG", default=False)
 
 ALLOWED_HOSTS = []
 
@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # apps:
+    "tarefas",
+    # 3rd apps:
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
