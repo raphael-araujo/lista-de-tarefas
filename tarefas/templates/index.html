@@ -16,17 +16,17 @@
                     </div>
                 </div>
                 <br>
-                <div class="row g-0 justify-content-end d-flex" hx-get="{% url 'lista_tarefas' %}"
+                <div class="row justify-content-center justify-content-md-end" hx-get="{% url 'lista_tarefas' %}"
                     hx-trigger="change from:body #filtro_prioridade" hx-target="#search-results"
                     hx-include="#filtro_titulo, #filtro_prioridade">
 
-                    <div class="col-auto me-3">
+                    <div class="col-md-auto d-flex flex-column flex-row">
                         <input id="filtro_titulo" class="form-control" type="search" name="titulo"
                             placeholder="Pesquisar..." hx-get="{% url 'lista_tarefas' %}"
                             hx-trigger="keyup changed delay:500ms, search">
                     </div>
 
-                    <div class="col-auto">
+                    <div class="col-md-auto d-flex flex-column flex-row">
                         <select class="form-select text-center" id="filtro_prioridade" title="filtro-prioridade"
                             name="prioridade">
                             <option value="">
@@ -42,26 +42,28 @@
                 </div>
                 <br>
                 <br>
-                <table class="table table-striped table-light table-hover align-middle" border="1" vertical-align="center">
-                    <thead class="table-dark">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Título</th>
-                            <th scope="col">Descrição</th>
-                            <th scope="col">Prioridade</th>
-                            <th scope="col">Data</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="search-results" hx-trigger="load, taskListChanged from:body"
-                        hx-get="{% url 'lista_tarefas' %}" hx-target="this">
-                        <tr>
-                            <td class="spinner-border" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped table-light table-hover align-middle" border="1" vertical-align="center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Título</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Prioridade</th>
+                                <th scope="col">Data</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="search-results" hx-trigger="load, taskListChanged from:body"
+                            hx-get="{% url 'lista_tarefas' %}" hx-target="this">
+                            <tr>
+                                <td class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <br><br><br>
             </div>
         </div>
@@ -75,7 +77,7 @@
 
     <!-- Empty toast to show the message -->
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="toast" class="toast align-items-center text-white bg-dark border-0" role="alert"
+        <div id="toast" class="toast align-items-center text-dark bg-warning border-0" role="alert"
             aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div id="toast-body" class="toast-body"></div>
