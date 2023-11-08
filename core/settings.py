@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # apps:
     "tarefas",
+    "autenticacao",
     # 3rd apps:
     'widget_tweaks',
 ]
