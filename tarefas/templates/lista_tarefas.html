@@ -1,0 +1,63 @@
+{% if tarefas %}
+    {% for tarefa in tarefas %}
+        <tr id="tarefa-{{ tarefa.id }}" class="tarefa-row">
+            <th scope="row">
+                {{ forloop.counter }}
+            </th>
+            <td>{{ tarefa.titulo }}</td>
+            <td>
+                {% if tarefa.descricao %}
+                    {{ tarefa.descricao }}
+                {% else %}
+                    -----
+                {% endif %}
+            </td>
+            <td title="Prioridade {{ tarefa.get_prioridade_display }}">
+                {{ tarefa.icon }}
+            </td>
+            <td>
+                {{ tarefa.data }}
+            </td>
+            <td align="right">
+                {% if not tarefa.realizada %}
+                    <button type="button" class="block mr-2 hover:text-gray-600 btn btn-primary" hx-get="{% url 'editar_tarefa' tarefa.id %}" hx-target="#dialog">Editar</button>
+                    <button type="button" class="block mr-2 hover:text-gray-600 btn btn-success" hx-trigger="confirmed" hx-get="{% url 'finalizar_tarefa' tarefa.id %}" _="on click
+                                call Swal.fire({
+                                    title: 'Marcar tarefa como finalizada?',
+                                    icon: 'info',
+                                    showCancelButton: true,
+                                    cancelButtonColor: '#6c757d',
+                                    cancelButtonText: 'Cancelar',
+                                    confirmButtonColor: '#198754',
+                                    confirmButtonText: 'Confirmar',
+                                    reverseButtons: true
+                                }) if result.isConfirmed trigger confirmed">
+                        Finalizar
+                    </button>
+                {% else %}
+                    <button type="button" class="block mr-2 hover:text-gray-600 btn btn-danger" hx-trigger="confirmed"
+                        hx-delete="{% url 'excluir_tarefa' tarefa.id %}" _="on click
+                                                call Swal.fire({
+                                                    title: 'Excluir tarefa?',
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    cancelButtonColor: '#6c757d',
+                                                    cancelButtonText: 'Cancelar',
+                                                    confirmButtonColor: '#198754',
+                                                    confirmButtonText: 'Confirmar',
+                                                    reverseButtons: true
+                                                }) if result.isConfirmed trigger confirmed">
+                        Excluir
+                    </button>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+{% else %}
+    <tr>
+        <th colspan="6">
+            <br>
+            <h6>Nenhuma tarefa encontrada</h6>
+        </th>
+    </tr>
+{% endif %}

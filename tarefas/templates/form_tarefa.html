@@ -1,0 +1,57 @@
+{% load widget_tweaks %}
+{% with WIDGET_ERROR_CLASS='is-invalid' %}
+    <form hx-post="{{ request.path }}" class="modal-content">
+        <div class="modal-header">
+            {% if tarefa %}
+                <h5 class="modal-title">Editar Tarefa</h5>
+            {% else %}
+                <h5 class="modal-title">Nova Tarefa</h5>
+            {% endif %}
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="{{ form.titulo.id_for_label }}" class="form-label">Titulo</label>
+                {% render_field form.titulo class="form-control" placeholder="Insira o título da tarefa" %}
+                <div class="invalid-feedback">{{ form.titulo.errors|first }}</div>
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.descricao.id_for_label }}" class="form-label">Descrição</label>
+                {% render_field form.descricao class="form-control" placeholder="Insira a descrição da tarefa (opcional)" %}
+                <div class="invalid-feedback">{{ form.descricao.errors|first }}</div>
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.prioridade.id_for_label }}" class="form-label">Prioridade</label>
+                {% render_field form.prioridade class="form-select" %}
+                <div class="invalid-feedback">{{ form.prioridade.errors|first }}</div>
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.data.id_for_label }}" class="form-label">Data</label>
+                {% render_field form.data class="form-control" type="date" %}
+                <div class="invalid-feedback">{{ form.data.errors|first }}</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            {% if tarefa %}
+                <button type="button" class="block mr-2 hover:text-gray-600 btn btn-danger" hx-trigger="confirmed" hx-delete="{% url 'excluir_tarefa' tarefa.id %}" _="on click
+                            call Swal.fire({
+                                title: 'Excluir tarefa?',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                cancelButtonColor: '#6c757d',
+                                cancelButtonText: 'Cancelar',
+                                confirmButtonColor: '#198754',
+                                confirmButtonText: 'Confirmar',
+                                reverseButtons: true
+                            }) if result.isConfirmed trigger confirmed">
+                    Excluir
+                </button>
+                <span class="flex-grow-1"></span>
+            {% endif %}
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Cancelar
+            </button>
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </div>
+    </form>
+{% endwith %}
