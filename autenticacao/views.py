@@ -13,8 +13,14 @@ def cadastro(request: HttpRequest) -> HttpResponse:
         form = CadastroForm(request.POST)
         if form.is_valid():
             form.save()
+
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password1"]
+            user = auth.authenticate(username=username, password=password)
+            auth.login(request, user)
+
             messages.success(request, "Usuário criado com sucesso.")
-            return redirect(to="login")
+            return redirect(to="index")
     else:
         if request.user.is_authenticated:
             return redirect(to="index")
