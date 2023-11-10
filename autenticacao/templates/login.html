@@ -1,0 +1,63 @@
+{% extends 'base_auth.html' %}
+{% load widget_tweaks %}
+
+
+{% block 'title' %}Login | Lista de Tarefas{% endblock %}
+
+{% block 'main' %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <div class="box">
+                    {% with WIDGET_ERROR_CLASS='is-invalid' %}
+                        <form method="POST" class="row g-3 text-white" action="{% url 'login' %}"> {% csrf_token %}
+                            <h1 class="titulo font-degrade borda-bottom-degrade">LOGIN</h1>
+                            <br><br>
+                            <div class="col-12">
+                                <br>
+                                <label for="{{ form.userinput.id_for_label }}" class="form-label">Nome de usuário ou E-mail:</label>
+                                {% render_field form.userinput class="form-control" %}
+                                <div class="invalid-feedback">{{ form.userinput.errors|first }}</div>
+                            </div>
+                            <div class="col-12">
+                                <br>
+                                <label for="{{ form.password.id_for_label }}" class="form-label">Senha:</label>
+                                {% render_field form.password class="form-control" %}
+                                <div class="invalid-feedback">{{ form.password.errors|first }}</div>
+                                <br><br>
+                            </div>
+                            <br><br><br>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-success">Login</button>
+                            </div>
+                            <div class="col-4 offset-2">
+                                <a href="{% url 'cadastro' %}" class="btn btn-link text-decoration-none">
+                                    Cadastre-se
+                                </a>
+                            </div>
+                        </form>
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="toast-container position-fixed top-0 end-0 p-3">
+                <div id="toastMsg" class="toast align-items-center text-{{message.tags}} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body fw-bold">
+                            {{message}}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+

@@ -39,3 +39,20 @@ class CadastroForm(UserCreationForm):
             self.cleaned_data["password1"],
         )
         return user
+
+
+class LoginForm(forms.Form):
+    userinput = forms.CharField(label="userinput", min_length=5, max_length=150)
+    password = forms.CharField(label="password", widget=forms.PasswordInput)
+
+    def clean_userinput(self):
+        userinput = self.cleaned_data["userinput"]
+        if len(userinput.strip()) == 0:
+            raise ValidationError("Preencha este campo")
+        return userinput
+
+    def clean_password(self):
+        password = self.cleaned_data["password"]
+        if len(password.strip()) == 0:
+            raise ValidationError("Preencha este campo")
+        return password
