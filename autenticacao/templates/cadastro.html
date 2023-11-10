@@ -1,0 +1,62 @@
+{% extends 'base_auth.html' %}
+{% load widget_tweaks %}
+
+{% block 'title' %}Cadastro | Lista de Tarefas{% endblock %}
+
+{% block 'main' %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <div class="box">
+                    {% with WIDGET_ERROR_CLASS='is-invalid' %}
+                        <form method="POST" class="row g-3 text-white" action="{% url 'cadastro' %}" > {% csrf_token %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <script>
+                                        htmx.trigger('#toast', 'showMessage', {value: '{{ message }}'});
+                                    </script>
+                                {% endfor %}
+                            {% endif %}
+                            <h1 class="titulo font-degrade borda-bottom-degrade">CADASTRE-SE</h1>
+                            <br><br>
+                            <div class="col-12">
+                                <br>
+                                <label for="{{ form.username.id_for_label }}" class="form-label">Nome de usuário:</label>
+                                {% render_field form.username class="form-control" %}
+                                <div class="invalid-feedback">{{ form.username.errors|first }}</div>
+                            </div>
+                            <div class="col-12">
+                                <br>
+                                <label for="{{ form.email.id_for_label }}" class="form-label">E-mail:</label>
+                                {% render_field form.email class="form-control" %}
+                                <div class="invalid-feedback">{{ form.email.errors|first }}</div>
+                            </div>
+                            <div class="col-6">
+                                <br>
+                                <label for="{{ form.password1.id_for_label }}" class="form-label">Senha:</label>
+                                {% render_field form.password1 class="form-control" %}
+                                <div class="invalid-feedback">{{ form.password1.errors|first }}</div>
+                            </div>
+                            <div class="col-6">
+                                <br>
+                                <label for="{{ form.password2.id_for_label }}" class="form-label">Confirmar senha:</label>
+                                {% render_field form.password2 class="form-control" %}
+                                <div class="invalid-feedback">{{ form.password2.errors|first }}</div>
+                                <br><br><br>
+                            </div>
+                            <br><br><br>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-success">Cadastrar</button>
+                            </div>
+                            <div class="col-6">
+                                <a href="{% url 'login' %}" class="btn btn-link text-decoration-none">
+                                    Já possui uma conta?
+                                </a>
+                            </div>
+                        </form>
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
