@@ -1,0 +1,36 @@
+.box {
+    background-color: #444;
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0px 20px 0 rgb(212, 209, 209);
+}
+
+.font-degrade {
+    background-image: linear-gradient(90deg,
+            rgb(17, 0, 255) 0%,
+            rgb(255, 255, 255) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    padding-bottom: 10px;
+}
+
+.titulo {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.borda-bottom-degrade {
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(90deg,
+            rgb(17, 0, 255) 0%,
+            rgb(255, 255, 255) 100%);
+    border-image-slice: 1;
+}
