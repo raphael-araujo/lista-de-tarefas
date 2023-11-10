@@ -58,3 +58,8 @@ def login(request: HttpRequest) -> HttpResponse:
         form = LoginForm()
 
     return render(request, "login.html", {"form": form})
+
+
+def logout(request: HttpRequest) -> HttpResponse:
+    auth.logout(request)
+    return redirect(to=login)
