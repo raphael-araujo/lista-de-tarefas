@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 
 from decouple import config
+from django.contrib.messages import constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,7 +45,7 @@ INSTALLED_APPS = [
     "tarefas",
     "autenticacao",
     # 3rd apps:
-    'widget_tweaks',
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,14 @@ MEDIA_URL = "/media/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Messages
+
+MESSAGE_TAGS = {
+    constants.DEBUG: "bg-primary",
+    constants.ERROR: "bg-danger",
+    constants.WARNING: "bg-warning",
+    constants.SUCCESS: "bg-success",
+    constants.INFO: "bg-info",
+}

@@ -7,4 +7,8 @@
         toastBody.innerText = e.detail.value
         toast.show()
     })
+
+    const toastMessage = document.getElementById('toastMsg')
+    const toastMsg = new bootstrap.Toast(toastMessage, { delay: 3000 })
+    toastMsg.show()
 })()
