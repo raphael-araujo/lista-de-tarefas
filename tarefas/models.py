@@ -1,5 +1,6 @@
 from datetime import date
 
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import MinLengthValidator
 from django.db import models
@@ -14,6 +15,7 @@ def validate_data(data: date):
 class Tarefa(models.Model):
     CHOICE_PRIORIDADE = (("B", "Baixa"), ("M", "Média"), ("A", "Alta"))
 
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     titulo = models.CharField(
         max_length=25,
         validators=[
