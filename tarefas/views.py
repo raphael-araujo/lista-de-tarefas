@@ -19,7 +19,7 @@ def index(request: HttpRequest) -> HttpResponse:
 def lista_tarefas(request: HttpRequest) -> HttpResponse:
     filtro_titulo = request.GET.get("titulo")
     filtro_prioridade = request.GET.get("prioridade")
-    tarefas = Tarefa.objects.filter(realizada=False).order_by("data")
+    tarefas = Tarefa.objects.filter(usuario=request.user, realizada=False).order_by("data")
 
     if filtro_titulo:
         tarefas = tarefas.filter(titulo__icontains=filtro_titulo)
@@ -35,7 +35,9 @@ def adicionar_tarefa(request: HttpRequest) -> HttpResponse:
         form = TarefaForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            tarefa = form.save(commit=False)
+            tarefa.usuario = request.user
+            tarefa.save()
             return HttpResponse(
                 status=204,
                 headers={
@@ -55,7 +57,7 @@ def adicionar_tarefa(request: HttpRequest) -> HttpResponse:
 
 @login_required(login_url="login")
 def finalizar_tarefa(request: HttpRequest, id_tarefa: int) -> HttpResponse:
-    tarefa = get_object_or_404(Tarefa, id=id_tarefa)
+    tarefa = get_object_or_404(Tarefa, id=id_tarefa, usuario=request.user)
     tarefa.realizada = True
     tarefa.save()
     return HttpResponse(
@@ -73,7 +75,7 @@ def finalizar_tarefa(request: HttpRequest, id_tarefa: int) -> HttpResponse:
 
 @login_required(login_url="login")
 def editar_tarefa(request: HttpRequest, id_tarefa: int) -> HttpResponse:
-    tarefa = get_object_or_404(Tarefa, id=id_tarefa)
+    tarefa = get_object_or_404(Tarefa, id=id_tarefa, usuario=request.user)
 
     if request.method == "POST":
         form = TarefaForm(request.POST, instance=tarefa)
@@ -100,7 +102,7 @@ def editar_tarefa(request: HttpRequest, id_tarefa: int) -> HttpResponse:
 @login_required(login_url="login")
 @require_http_methods(["DELETE"])
 def excluir_tarefa(request: HttpRequest, id_tarefa: int) -> HttpResponse:
-    tarefa = get_object_or_404(Tarefa, id=id_tarefa)
+    tarefa = get_object_or_404(Tarefa, id=id_tarefa, usuario=request.user)
     tarefa.delete()
     return HttpResponse(
         status=204,
