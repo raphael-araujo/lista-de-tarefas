@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row justify-content-center justify-content-md-end" hx-get="{% url 'lista_tarefas' %}"
+                <div class="row justify-content-center justify-content-md-end gap-2" hx-get="{% url 'lista_tarefas' %}"
                     hx-trigger="change from:body #filtro_prioridade" hx-target="#search-results"
                     hx-include="#filtro_titulo, #filtro_prioridade">
 
