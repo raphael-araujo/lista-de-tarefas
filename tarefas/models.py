@@ -17,7 +17,7 @@ class Tarefa(models.Model):
 
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     titulo = models.CharField(
-        max_length=25,
+        max_length=40,
         validators=[
             MinLengthValidator(
                 limit_value=3,
