@@ -20,20 +20,22 @@
             </td>
             <td align="right">
                 {% if not tarefa.realizada %}
-                    <button type="button" class="block mr-2 hover:text-gray-600 btn btn-primary" hx-get="{% url 'editar_tarefa' tarefa.id %}" hx-target="#dialog">Editar</button>
-                    <button type="button" class="block mr-2 hover:text-gray-600 btn btn-success" hx-trigger="confirmed" hx-get="{% url 'finalizar_tarefa' tarefa.id %}" _="on click
-                                call Swal.fire({
-                                    title: 'Marcar tarefa como finalizada?',
-                                    icon: 'info',
-                                    showCancelButton: true,
-                                    cancelButtonColor: '#6c757d',
-                                    cancelButtonText: 'Cancelar',
-                                    confirmButtonColor: '#198754',
-                                    confirmButtonText: 'Confirmar',
-                                    reverseButtons: true
-                                }) if result.isConfirmed trigger confirmed">
-                        Finalizar
-                    </button>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="block mr-2 hover:text-gray-600 btn btn-primary" hx-get="{% url 'editar_tarefa' tarefa.id %}" hx-target="#dialog">Editar</button>
+                        <button type="button" class="block mr-2 hover:text-gray-600 btn btn-success" hx-trigger="confirmed" hx-get="{% url 'finalizar_tarefa' tarefa.id %}" _="on click
+                                    call Swal.fire({
+                                        title: 'Marcar tarefa como finalizada?',
+                                        icon: 'info',
+                                        showCancelButton: true,
+                                        cancelButtonColor: '#6c757d',
+                                        cancelButtonText: 'Cancelar',
+                                        confirmButtonColor: '#198754',
+                                        confirmButtonText: 'Confirmar',
+                                        reverseButtons: true
+                                    }) if result.isConfirmed trigger confirmed">
+                            Finalizar
+                        </button>
+                    </div>
                 {% else %}
                     <button type="button" class="block mr-2 hover:text-gray-600 btn btn-danger" hx-trigger="confirmed"
                         hx-delete="{% url 'excluir_tarefa' tarefa.id %}" _="on click
