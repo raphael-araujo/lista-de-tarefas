@@ -16,7 +16,7 @@
 <p align="center">
   <img alt="cadastro" src="assets/images/pagina_de_cadastro.jpeg" width=250>
   <img alt="Login" src="assets/images/pagina_de_login.jpeg" width=250>
-  <img alt="Página de tarefas" src="assets/images/pagina_de_tarefas.jpeg" width=250>
+  <img alt="Página de tarefas" src="assets/images/Pagina_de_tarefas.jpeg" width=250>
   <img alt="Página de adicionar tarefas" src="assets/images/pagina_de_adicionar_tarefa.jpeg" width=250>
   <img alt="Página de editar tarefas" src="assets/images/pagina_de_editar_tarefa.jpeg" width=250>
 </p>
