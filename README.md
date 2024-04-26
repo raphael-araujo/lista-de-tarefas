@@ -28,9 +28,9 @@
 Aplicação de gerenciamento de tarefas.
 
 <p>
-    <a href="https://gerenciamento-de-tarefas-django.fly.dev" target="_blank">
+<!--     <a href="https://gerenciamento-de-tarefas-django.fly.dev" target="_blank">
         Site da aplicação
-    </a><br>
+    </a><br> -->
     <a href="https://youtu.be/pCvgTL66PGE" target="_blank">
         Vídeo de demonstração
     </a><br>
